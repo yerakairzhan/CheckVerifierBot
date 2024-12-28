@@ -1,0 +1,6 @@
+{
+  "start_message": "Hello, Book Reader!\n(if you want to change the language press: /lang)",
+  "unknown_command" : "Sorry, but I don't know this command",
+  "change_lang_message" : "You can choose Language you prefer below",
+  "succes_language_change" : "You successfully changed the language"
+}
