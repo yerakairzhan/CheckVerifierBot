@@ -5,6 +5,7 @@
   "change_lang_message" : "You can choose Language you prefer below",
   "packet_information" : "Packet1\ninformation about it\n\nPacket2\ninformation about it\n\nPacket3\ninformation about it",
   "packet_1" : "You selected first package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
-  "packet_1" : "You selected second package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
-  "packet_1" : "You selected third package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!"
+  "packet_2" : "You selected second package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
+  "packet_3" : "You selected third package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
+  "follow" : "Please, follow the instruction"
 }

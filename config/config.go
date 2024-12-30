@@ -13,6 +13,7 @@ var DB_PORT string
 var DB_USER string
 var DB_PASSWORD string
 var DB_NAME string
+var PAY_URL string
 
 func LoadConfig() {
 	// Загрузка переменных из .env
@@ -27,4 +28,5 @@ func LoadConfig() {
 	DB_USER = os.Getenv("DB_USER")
 	DB_PASSWORD = os.Getenv("DB_PASSWORD")
 	DB_NAME = os.Getenv("DB_NAME")
+	PAY_URL = os.Getenv("PAY_URL")
 }

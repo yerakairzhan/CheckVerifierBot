@@ -21,7 +21,8 @@ func SetupHandlers(bot *tgbotapi.BotAPI, queries *db.Queries) {
 		} else if update.Message != nil && update.Message.IsCommand() {
 			handleCommand(bot, update, queries)
 		} else {
-			handleReply(bot, update)
+			chatID := update.Message.Chat.ID
+			handleReply(bot, update, queries, chatID)
 		}
 	}
 

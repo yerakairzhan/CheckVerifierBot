@@ -15,11 +15,11 @@ func RegisterHandler(queries *db.Queries, bot *tgbotapi.BotAPI, update tgbotapi.
 	var username string
 	var chatID int64
 	if update.Message != nil {
-		chatID = (update.Message.Chat.ID)
+		chatID = update.Message.Chat.ID
 		userID = int(update.Message.From.ID)
 		username = update.Message.From.UserName
 	} else if update.CallbackQuery != nil {
-		chatID = (update.CallbackQuery.Message.Chat.ID)
+		chatID = update.CallbackQuery.Message.Chat.ID
 		userID = int(update.CallbackQuery.From.ID)
 		username = update.CallbackQuery.From.UserName
 	}

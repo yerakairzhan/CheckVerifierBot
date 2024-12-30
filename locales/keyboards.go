@@ -1,6 +1,7 @@
 package locales
 
 import (
+	"CheckVerifier/config"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 )
@@ -37,4 +38,14 @@ func PacketKeyboard(bot *tgbotapi.BotAPI, chatID int64, text string) tgbotapi.Re
 		),
 	)
 	return keyboard
+}
+
+func LinkKeyboard() tgbotapi.InlineKeyboardMarkup {
+	config.LoadConfig()
+	url := config.PAY_URL
+	inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonURL("Kaspi tap", url)),
+	)
+	return inlineKeyboard
 }

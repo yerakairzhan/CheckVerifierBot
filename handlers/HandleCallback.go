@@ -60,24 +60,32 @@ func HandleCallback(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Qu
 	}
 }
 
-func handleReply(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+func handleReply(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Queries, chatID int64) {
 	userResponse := update.Message.Text
-
+	ctx := context.Background()
+	_, text := locales.GetTranslation(ctx, bot, queries, "follow", update)
+	removeKeyboardMsg := tgbotapi.NewMessage(chatID, text)
+	removeKeyboardMsg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+	bot.Send(removeKeyboardMsg)
 	switch userResponse {
 	case "NameOfFirst":
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "You selected Option 1.")
-		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+		_, text := locales.GetTranslation(ctx, bot, queries, "packet_1", update)
+		msg := tgbotapi.NewMessage(chatID, text)
+		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
 	case "NameOfSecond":
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "You selected Option 2.")
-		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+		_, text := locales.GetTranslation(ctx, bot, queries, "packet_2", update)
+		msg := tgbotapi.NewMessage(chatID, text)
+		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
 	case "NameOfThird":
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "You selected Option 3.")
-		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+		_, text := locales.GetTranslation(ctx, bot, queries, "packet_3", update)
+		msg := tgbotapi.NewMessage(chatID, text)
+		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
 	default:
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Unknown option. Please select from the keyboard.")
+		var msg tgbotapi.MessageConfig
+		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 		bot.Send(msg)
 	}
 }
