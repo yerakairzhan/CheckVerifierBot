@@ -20,3 +20,21 @@ func InlineLanguage(bot *tgbotapi.BotAPI, chatID int64, text string) {
 		log.Printf("Failed to send inline keyboard: %v", err)
 	}
 }
+
+func PacketKeyboard(bot *tgbotapi.BotAPI, chatID int64, text string) tgbotapi.ReplyKeyboardMarkup {
+	keyboard := tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("NameOfFirst"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("NameOfSecond"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("NameOfThird"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Отмена"),
+		),
+	)
+	return keyboard
+}

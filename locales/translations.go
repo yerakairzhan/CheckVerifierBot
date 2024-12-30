@@ -57,21 +57,20 @@ func Translate(lang, key string) string {
 	return message
 }
 
-func GetTranslation(ctx context.Context, bot *tgbotapi.BotAPI, queries *db.Queries, key string, update tgbotapi.Update) string {
+func GetTranslation(ctx context.Context, bot *tgbotapi.BotAPI, queries *db.Queries, key string, update tgbotapi.Update) (error, string) {
 	var userID int
 
-	// Determine the source of the request
 	if update.Message != nil {
 		userID = int(update.Message.From.ID)
 	} else if update.CallbackQuery != nil {
 		userID = int(update.CallbackQuery.From.ID)
 	}
-	// Get user's preferred language from the database
+
 	lang, err := queries.GetLanguage(ctx, strconv.Itoa(userID))
 	if err != nil {
 		log.Printf("Failed to Get Language: %v", err)
 	}
-	// Translate the message using the provided key
+
 	message := Translate(lang, key)
-	return message
+	return nil, message
 }

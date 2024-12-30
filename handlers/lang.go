@@ -11,7 +11,7 @@ import (
 func AskForLanguage(queries *db.Queries, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	var chatID int64
 	ctx := context.Background()
-	text := locales.GetTranslation(ctx, bot, queries, "change_lang_message", update)
+	_, text := locales.GetTranslation(ctx, bot, queries, "change_lang_message", update)
 	if update.Message != nil {
 		chatID = update.Message.Chat.ID
 	} else if update.CallbackQuery != nil {

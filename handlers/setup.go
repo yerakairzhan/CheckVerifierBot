@@ -16,17 +16,15 @@ func SetupHandlers(bot *tgbotapi.BotAPI, queries *db.Queries) {
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		go func(update tgbotapi.Update) {
-			if update.CallbackQuery != nil {
-				log.Printf("Received CallbackQuery: %+v", update.CallbackQuery)
-				HandleCallback(bot, update, queries)
-			} else if update.Message != nil && update.Message.IsCommand() {
-				handleCommand(bot, update, queries)
-			} else {
-				log.Printf("Unhandled update: %+v\n", update)
-			}
-		}(update)
+		if update.CallbackQuery != nil {
+			HandleCallback(bot, update, queries)
+		} else if update.Message != nil && update.Message.IsCommand() {
+			handleCommand(bot, update, queries)
+		} else {
+			handleReply(bot, update)
+		}
 	}
+
 }
 
 func handleCommand(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Queries) {
@@ -42,7 +40,7 @@ func handleCommand(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Que
 		log.Printf("Language handler called by: @%s", update.Message.From.UserName)
 
 	default:
-		text := locales.GetTranslation(ctx, bot, queries, "unknown_command", update)
+		_, text := locales.GetTranslation(ctx, bot, queries, "unknown_command", update)
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
 		bot.Send(msg)
 	}
