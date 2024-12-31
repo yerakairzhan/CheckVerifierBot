@@ -1,0 +1,29 @@
+name: Go CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Устанавливаем Go
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+
+      # Проверяем установленную версию Go
+      - name: Check Go version
+        run: go version
+
+      # Устанавливаем зависимости
+      - name: Install dependencies
+        run: go mod tidy
+
+      # Собираем проект
+      - name: Build project
+        run: go build -o bot .
