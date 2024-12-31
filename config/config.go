@@ -1,10 +1,9 @@
 package config
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 var BotToken string
@@ -14,6 +13,7 @@ var DB_USER string
 var DB_PASSWORD string
 var DB_NAME string
 var PAY_URL string
+var RECEIVER_ID string
 
 func LoadConfig() {
 	// Загрузка переменных из .env
@@ -29,4 +29,5 @@ func LoadConfig() {
 	DB_PASSWORD = os.Getenv("DB_PASSWORD")
 	DB_NAME = os.Getenv("DB_NAME")
 	PAY_URL = os.Getenv("PAY_URL")
+	RECEIVER_ID = os.Getenv("USER_CHECK_ID")
 }

@@ -1,11 +1,14 @@
 {
-  "start_message": "Hello, Welcome to BOT!\n(if you want to change the language press: /lang)",
-  "unknown_command" : "Sorry, but I don't know this command",
-  "success_language_change" : "You successfully changed the language",
-  "change_lang_message" : "You can choose Language you prefer below",
-  "packet_information" : "Packet1\ninformation about it\n\nPacket2\ninformation about it\n\nPacket3\ninformation about it",
-  "packet_1" : "You selected first package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
-  "packet_2" : "You selected second package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
-  "packet_3" : "You selected third package\nMake transfer by this link to Kaspi and your next screenshot should be a screenshot of check!",
-  "follow" : "Please, follow the instruction"
+  "start_message": "Hello, Welcome to the Bookstore Bot!\n(if you want to change the language press: /lang)",
+  "unknown_command": "Sorry, I don't recognize this command. Please try again.",
+  "success_language_change": "You successfully changed the language.",
+  "change_lang_message": "Choose your preferred language below.",
+  "packet_information": "Book 1: 'The Great Adventure'\n- A thrilling journey of courage and discovery.\n\nBook 2: 'Cooking Like a Pro'\n- Master the art of cooking with step-by-step guides.\n\nBook 3: 'Tech for Dummies'\n- A beginner's guide to understanding technology.",
+  "packet_1": "You selected 'The Great Adventure'.\nMake a payment using this link to Kaspi, and upload your payment receipt as a screenshot!",
+  "packet_2": "You selected 'Cooking Like a Pro'.\nMake a payment using this link to Kaspi, and upload your payment receipt as a screenshot!",
+  "packet_3": "You selected 'Tech for Dummies'.\nMake a payment using this link to Kaspi, and upload your payment receipt as a screenshot!",
+  "follow": "Please follow the instructions carefully to complete your purchase.",
+  "sended_photo": "Thank you for your purchase! Our team will review your payment and contact you shortly.",
+  "purchase_successful": "Congratulations! Your payment has been verified, and the book will be sent to you soon.",
+  "purchase_unsuccessful": "Unfortunately, your payment could not be verified. Please contact support for assistance."
 }

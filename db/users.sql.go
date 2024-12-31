@@ -9,6 +9,15 @@ import (
 	"context"
 )
 
+const acceptPurchase = `-- name: AcceptPurchase :exec
+update users set purchased = true where user_id = $1
+`
+
+func (q *Queries) AcceptPurchase(ctx context.Context, userID string) error {
+	_, err := q.db.ExecContext(ctx, acceptPurchase, userID)
+	return err
+}
+
 const approveCheck = `-- name: ApproveCheck :exec
 update users set purchased = TRUE where user_id = $1
 `
@@ -58,4 +67,70 @@ func (q *Queries) GetLanguage(ctx context.Context, userID string) (string, error
 	var language_code string
 	err := row.Scan(&language_code)
 	return language_code, err
+}
+
+const infoUser = `-- name: InfoUser :one
+SELECT
+    'username: @' || username || '    chosen_package: ' || chosen_package AS formatted_output
+FROM
+    users
+WHERE
+    user_id = $1
+`
+
+func (q *Queries) InfoUser(ctx context.Context, userID string) (interface{}, error) {
+	row := q.db.QueryRowContext(ctx, infoUser, userID)
+	var formatted_output interface{}
+	err := row.Scan(&formatted_output)
+	return formatted_output, err
+}
+
+const selectUsers = `-- name: SelectUsers :many
+SELECT id, user_id, username, purchased, language_code, chosen_package
+FROM users
+ORDER BY purchased DESC, id ASC
+`
+
+func (q *Queries) SelectUsers(ctx context.Context) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, selectUsers)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []User
+	for rows.Next() {
+		var i User
+		if err := rows.Scan(
+			&i.ID,
+			&i.UserID,
+			&i.Username,
+			&i.Purchased,
+			&i.LanguageCode,
+			&i.ChosenPackage,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const setPackage = `-- name: SetPackage :exec
+update users set chosen_package = $2 where user_id = $1
+`
+
+type SetPackageParams struct {
+	UserID        string `json:"user_id"`
+	ChosenPackage string `json:"chosen_package"`
+}
+
+func (q *Queries) SetPackage(ctx context.Context, arg SetPackageParams) error {
+	_, err := q.db.ExecContext(ctx, setPackage, arg.UserID, arg.ChosenPackage)
+	return err
 }

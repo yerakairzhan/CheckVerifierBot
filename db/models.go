@@ -9,9 +9,10 @@ import (
 )
 
 type User struct {
-	ID           int32        `json:"id"`
-	UserID       string       `json:"user_id"`
-	Username     string       `json:"username"`
-	Purchased    sql.NullBool `json:"purchased"`
-	LanguageCode string       `json:"language_code"`
+	ID            int32        `json:"id"`
+	UserID        string       `json:"user_id"`
+	Username      string       `json:"username"`
+	Purchased     sql.NullBool `json:"purchased"`
+	LanguageCode  string       `json:"language_code"`
+	ChosenPackage string       `json:"chosen_package"`
 }
