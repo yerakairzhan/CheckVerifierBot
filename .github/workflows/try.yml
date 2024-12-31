@@ -3,10 +3,10 @@ name: Go CI/CD
 on:
   push:
     branches:
-      - main
+      - main  # Запускается при пуше в ветку main
   pull_request:
     branches:
-      - main
+      - main  # Запускается при создании PR в main
 
 jobs:
   build:
@@ -17,13 +17,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Устанавливаем Go
+      # Устанавливаем Go (актуальную версию)
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
           go-version: 1.20
 
-      # Устанавливаем зависимости (корневая директория уже настроена)
+      # Проверяем, что Go установился корректно
+      - name: Verify Go version
+        run: go version
+
+      # Устанавливаем зависимости
       - name: Install dependencies
         run: go mod tidy
 
