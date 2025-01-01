@@ -23,7 +23,7 @@ services:
     image: postgres:16-alpine # Легкий образ PostgreSQL
     environment:
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: 4lnv041DhUf1BYeFmnX09lRPEVN2SaFV
+      POSTGRES_DB: checkdatabase
     ports:
       - "5433:5432" # Внешний порт 5433 мапится на внутренний 5432

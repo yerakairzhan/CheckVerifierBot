@@ -30,7 +30,7 @@ func main() {
 	envPass := config.DB_PASSWORD
 	envDbnm := config.DB_NAME
 
-	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", envUser, envPass, envPost, envPort, envDbnm)
+	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=require", envUser, envPass, envPost, envPort, envDbnm)
 	dbConn, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("Error with DB connection: %v", err)
