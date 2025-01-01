@@ -26,4 +26,4 @@ services:
       POSTGRES_PASSWORD: 4lnv041DhUf1BYeFmnX09lRPEVN2SaFV
       POSTGRES_DB: checkdatabase
     ports:
-      - "5433:5432" # Внешний порт 5433 мапится на внутренний 5432
+      - "10000:10000"
