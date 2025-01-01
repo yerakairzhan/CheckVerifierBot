@@ -9,7 +9,7 @@ services:
     environment:
       - "BOT_TOKEN=7923080732:AAFD4H1EGL4N6if7QJJDaqXiA6GeVSAT0nY"
       - "DB_HOST=my-db-host.onrender.com"
-      - "DB_PORT=5432" # Внутренний порт базы данных
+      - "DB_PORT=169.254.20.10:53" # Внутренний порт базы данных
       - "DB_USER=root"
       - "DB_PASSWORD=secret"
       - "DB_NAME=postgres"
