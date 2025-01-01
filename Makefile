@@ -5,11 +5,11 @@ sqlc:
 	sqlc generate
 
 mgup:
-	migrate -database "postgres://root:secret@db:5432/postgres?sslmode=disable" -path ./migrations up
-	#migrate -database "postgres://root:secret@localhost:5433/postgres?sslmode=disable" -path ./migrations up
+	migrate -database "postgres://root:4lnv041DhUf1BYeFmnX09lRPEVN2SaFV@dpg-ctqk213tq21c73a2te1g-a.oregon-postgres.render.com:5432/checkdatabase?sslmode=require" -path ./migrations up
 
 mgdown:
-	migrate -database "postgres://root:secret@localhost:5433/postgres?sslmode=disable" -path ./migrations down -all
+	migrate -database "postgres://root:4lnv041DhUf1BYeFmnX09lRPEVN2SaFV@dpg-ctqk213tq21c73a2te1g-a.oregon-postgres.render.com:5432/checkdatabase?sslmode=require" -path ./migrations down -all
+
 
 
 phony : sqlc, docker
