@@ -7,14 +7,15 @@ services:
     ports:
       - "8080:8080" # Порт, на котором бот слушает запросы
     environment:
-      - "BOT_TOKEN=7923080732:AAFD4H1EGL4N6if7QJJDaqXiA6GeVSAT0nY"
-      - "DB_HOST=my-db-host.onrender.com"
-      - "DB_PORT=169.254.20.10:53" # Внутренний порт базы данных
-      - "DB_USER=root"
-      - "DB_PASSWORD=secret"
-      - "DB_NAME=postgres"
-      - "USER_CHECK_ID=710606281"
-      - "PAY_URL=https://www.instagram.com/kaspi.kz/?hl=en"
+      - BOT_TOKEN=7923080732:AAFD4H1EGL4N6if7QJJDaqXiA6GeVSAT0nY
+      - USER_CHECK_ID=710606281
+      - PAY_URL=https://www.instagram.com/kaspi.kz/?hl=en
+      - DB_HOST=dpg-ctqk213tq21c73a2te1g-a.oregon-postgres.render.com
+      - DB_PORT=5432
+      - DB_NAME=checkdatabase
+      - DB_USER=root
+      - DB_PASSWORD=4lnv041DhUf1BYeFmnX09lRPEVN2SaFV
+      - DB_SSLMODE=require
     depends_on:
       - db
 
