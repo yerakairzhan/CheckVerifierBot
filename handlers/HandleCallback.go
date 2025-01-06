@@ -85,60 +85,49 @@ func handleCallback(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Qu
 		if _, err := bot.Send(msg); err != nil {
 			log.Printf("Failed to send confirmation message: %v", err)
 		}
-	} else {
-		log.Printf("Unknown callback data: %s", callbackData)
-		msg := tgbotapi.NewMessage(chatID, "Unknown action.")
-		bot.Send(msg)
-	}
-}
-
-func handleReply(bot *tgbotapi.BotAPI, update tgbotapi.Update, queries *db.Queries, chatID int64, userID int64) {
-	userResponse := update.Message.Text
-	ctx := context.Background()
-	_, text := locales.GetTranslation(ctx, bot, queries, "follow", update)
-	removeKeyboardMsg := tgbotapi.NewMessage(chatID, text)
-	removeKeyboardMsg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
-	bot.Send(removeKeyboardMsg)
-	switch userResponse {
-	case "NameOfFirst":
+	} else if callbackData == "first_choosen" {
 		_, text := locales.GetTranslation(ctx, bot, queries, "packet_1", update)
 		msg := tgbotapi.NewMessage(chatID, text)
 		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
+		_, text = locales.GetTranslation(ctx, bot, queries, "packet_1_name", update)
 		err := queries.SetPackage(context.Background(), db.SetPackageParams{
 			UserID:        strconv.FormatInt(userID, 10),
-			ChosenPackage: userResponse,
+			ChosenPackage: text,
 		})
 		if err != nil {
 			log.Printf("Failed to set package: %v", err)
 		}
-	case "NameOfSecond":
+	} else if callbackData == "first_choosen" {
 		_, text := locales.GetTranslation(ctx, bot, queries, "packet_2", update)
 		msg := tgbotapi.NewMessage(chatID, text)
 		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
+		_, text = locales.GetTranslation(ctx, bot, queries, "packet_2_name", update)
 		err := queries.SetPackage(context.Background(), db.SetPackageParams{
 			UserID:        strconv.FormatInt(userID, 10),
-			ChosenPackage: userResponse,
+			ChosenPackage: text,
 		})
 		if err != nil {
 			log.Printf("Failed to set package: %v", err)
 		}
-	case "NameOfThird":
+	} else if callbackData == "first_choosen" {
 		_, text := locales.GetTranslation(ctx, bot, queries, "packet_3", update)
 		msg := tgbotapi.NewMessage(chatID, text)
 		msg.ReplyMarkup = locales.LinkKeyboard()
 		bot.Send(msg)
+		_, text = locales.GetTranslation(ctx, bot, queries, "packet_3_name", update)
 		err := queries.SetPackage(context.Background(), db.SetPackageParams{
 			UserID:        strconv.FormatInt(userID, 10),
-			ChosenPackage: userResponse,
+			ChosenPackage: text,
 		})
 		if err != nil {
 			log.Printf("Failed to set package: %v", err)
 		}
-	default:
-		var msg tgbotapi.MessageConfig
-		msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+	} else {
+		log.Printf("Unknown callback data: %s", callbackData)
+		_, text := locales.GetTranslation(ctx, bot, queries, "unknown_command", update)
+		msg := tgbotapi.NewMessage(chatID, text)
 		bot.Send(msg)
 	}
 }

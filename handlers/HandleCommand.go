@@ -87,8 +87,11 @@ func MessageOnStart(ctx context.Context, bot *tgbotapi.BotAPI, queries *db.Queri
 	time.Sleep(1 * time.Second)
 
 	_, text = locales.GetTranslation(ctx, bot, queries, "packet_information", update)
+	_, choice1 := locales.GetTranslation(ctx, bot, queries, "packet_1_name", update)
+	_, choice2 := locales.GetTranslation(ctx, bot, queries, "packet_2_name", update)
+	_, choice3 := locales.GetTranslation(ctx, bot, queries, "packet_3_name", update)
 	msg = tgbotapi.NewMessage(chatID, text)
-	msg.ReplyMarkup = locales.PacketKeyboard(bot, chatID, text)
+	msg.ReplyMarkup = locales.InlinePacketKeyboard(choice1, choice2, choice3)
 	bot.Send(msg)
 }
 

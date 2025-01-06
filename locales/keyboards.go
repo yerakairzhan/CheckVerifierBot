@@ -23,6 +23,26 @@ func InlineLanguage(bot *tgbotapi.BotAPI, chatID int64, text string) {
 	}
 }
 
+func LinkKeyboard() tgbotapi.InlineKeyboardMarkup {
+	config.LoadConfig()
+	url := config.PAY_URL
+	inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonURL("Kaspi tap", url)),
+	)
+	return inlineKeyboard
+}
+
+func InlineForAdmin(userID string) tgbotapi.InlineKeyboardMarkup {
+	inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData("Accept", fmt.Sprintf("accept_%s", userID)),
+			tgbotapi.NewInlineKeyboardButtonData("Reject", fmt.Sprintf("reject_%s", userID)),
+		),
+	)
+	return inlineKeyboard
+}
+
 func PacketKeyboard(bot *tgbotapi.BotAPI, chatID int64, text string) tgbotapi.ReplyKeyboardMarkup {
 	keyboard := tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
@@ -41,21 +61,16 @@ func PacketKeyboard(bot *tgbotapi.BotAPI, chatID int64, text string) tgbotapi.Re
 	return keyboard
 }
 
-func LinkKeyboard() tgbotapi.InlineKeyboardMarkup {
-	config.LoadConfig()
-	url := config.PAY_URL
+func InlinePacketKeyboard(first string, second string, third string) tgbotapi.InlineKeyboardMarkup {
 	inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonURL("Kaspi tap", url)),
-	)
-	return inlineKeyboard
-}
-
-func InlineForAdmin(userID string) tgbotapi.InlineKeyboardMarkup {
-	inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+			tgbotapi.NewInlineKeyboardButtonData(first, "first_choosen"),
+		),
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonData("Accept", fmt.Sprintf("accept_%s", userID)),
-			tgbotapi.NewInlineKeyboardButtonData("Reject", fmt.Sprintf("reject_%s", userID)),
+			tgbotapi.NewInlineKeyboardButtonData(second, "second_choosen"),
+		),
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData(third, "third_choosen"),
 		),
 	)
 	return inlineKeyboard
